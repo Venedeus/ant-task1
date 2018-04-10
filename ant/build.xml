@@ -1,19 +1,31 @@
-<project name="task1" default="compile">
+<project name="task1" default="jar">
 	<property location="../.build" name="dir.build"/>
 	<property location="../src/java/classes" name="dir.src"/>
+	<property location="../.jar" name="dir.jar"/>
+	<property location="${dir.jar}/task1.jar" name="file.jar"/>
+
+	<target name="clean" description="Deleting folders.">
+		<echo level="info" message="Deleting folders."/>
+		<delete dir="${dir.build}"/>
+		<delete dir="${dir.jar}"/>
+	</target>
+
+	<target name="init" depends="clean" description="Initialization of the flow.">
+		<echo level="info" message="Initialization of the flow."/>
+		<mkdir dir="${dir.build}"/>
+		<mkdir dir="${dir.jar}"/>
+	</target>
 
 	<target name="compile" depends="init" description="Compiling java-project.">
 		<echo level="info" message="Compiling java-project."/>
 		<javac srcdir="${dir.src}" destdir="${dir.build}"/>
 	</target>
 
-	<target name="init" depends="clean" description="Initialization of the flow.">
-		<echo level="info" message="Initialization of the flow."/>
-		<mkdir dir="${dir.build}"/>
-	</target>
-
-	<target name="clean" description="Deleting folders.">
-		<echo level="info" message="Deleting folders."/>
-		<delete dir="${dir.build}"/>
+	<target name="jar" depends="compile" description="Creating jar-file.">
+		<echo level="info" message="Creating jar-file in ${dir.jar}."/>
+		<jar destfile="${file.jar}"
+			basedir="${dir.build}/classes"
+			compress="false"
+			index="true"/>
 	</target>
 </project>
