@@ -7,8 +7,13 @@
 		<javac srcdir="${dir.src}" destdir="${dir.build}"/>
 	</target>
 
-	<target name="init" description="Initialization of the flow.">
+	<target name="init" depends="clean" description="Initialization of the flow.">
 		<echo level="info" message="Initialization of the flow."/>
 		<mkdir dir="${dir.build}"/>
+	</target>
+
+	<target name="clean" description="Deleting folders.">
+		<echo level="info" message="Deleting folders."/>
+		<delete dir="${dir.build}"/>
 	</target>
 </project>
