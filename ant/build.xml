@@ -1,7 +1,14 @@
 <project name="task1" default="compile">
-	<target name="compile">
+	<property location="../.build" name="dir.build"/>
+	<property location="../src/java/classes" name="dir.src"/>
+
+	<target name="compile" depends="init" description="Compiling java-project.">
 		<echo level="info" message="Compiling java-project."/>
-		<mkdir dir="../.build"/>
-		<javac srcdir="../src/java/classes" destdir="../.build"/>
+		<javac srcdir="${dir.src}" destdir="${dir.build}"/>
+	</target>
+
+	<target name="init" description="Initialization of the flow.">
+		<echo level="info" message="Initialization of the flow."/>
+		<mkdir dir="${dir.build}"/>
 	</target>
 </project>
