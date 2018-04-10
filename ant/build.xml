@@ -1,8 +1,8 @@
-<project name="task1" default="jar">
-	<property location="../.build" name="dir.build"/>
-	<property location="../src/java/classes" name="dir.src"/>
-	<property location="../.jar" name="dir.jar"/>
-	<property location="${dir.jar}/task1.jar" name="file.jar"/>
+<project name="task1" default="run-jar">
+	<property name="dir.build" location="../.build"/>
+	<property name="dir.src" location="../src/java"/>
+	<property name="dir.jar" location="../.jar"/>
+	<property name="file.jar" location="${dir.jar}/${ant.project.name}.jar"/>
 
 	<target name="clean" description="Deleting folders.">
 		<echo level="info" message="Deleting folders."/>
@@ -24,8 +24,17 @@
 	<target name="jar" depends="compile" description="Creating jar-file.">
 		<echo level="info" message="Creating jar-file in ${dir.jar}."/>
 		<jar destfile="${file.jar}"
-			basedir="${dir.build}/classes"
+			basedir="${dir.build}"
 			compress="false"
-			index="true"/>
+			index="true">
+			<manifest>
+				<attribute name="Main-Class" value="HelloWorld"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="run" depends="jar" description="Running the applocation.">
+		<echo level="info" message="Running the application."/>
+		<java classname="HelloWorld" classpath="${dir.build}"/>
 	</target>
 </project>
