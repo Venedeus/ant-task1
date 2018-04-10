@@ -1,0 +1,7 @@
+<project name="task1" default="compile">
+	<target name="compile">
+		<echo level="info" message="Compiling java-project."/>
+		<mkdir dir="../.build"/>
+		<javac srcdir="../src/java/classes" destdir="../.build"/>
+	</target>
+</project>
