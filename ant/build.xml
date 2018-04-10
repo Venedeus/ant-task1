@@ -37,4 +37,10 @@
 		<echo level="info" message="Running the application."/>
 		<java classname="HelloWorld" classpath="${dir.build}"/>
 	</target>
+
+	<target name="run-jar" depends="run" description="Running the jar-file.">
+		<echo level="info" message="Running jar-file."/>
+		<java jar="${file.jar}"
+			fork="true"/>
+	</target>
 </project>
